@@ -16,7 +16,7 @@ y
  npm install
 ```
 
-## 3.- **Renombrar el archivo .env.template en la carpeta BACK, a .env y escribir las credenciales necesarias**
+## 3.- **Renombrar el archivo .env.template en la carpeta BACK, a .env y escribir las credenciales necesarias dentro de ese archivo**
 
 ## 4.- Correr el backend con el siguiente comando:
 ```
@@ -28,4 +28,13 @@ y
  cd FRONT
  npm run dev
 ```
+
+**Después de estos pasos, podrás acceder al FrontEnd desde esta url:**
+[http://localhost:5173](http://localhost:5173)
+
+**Y al BackEnd con GraphQL en esta url:**
+[http://localhost:3000/graphql](http://localhost:3000/graphql)
+
+
+
 

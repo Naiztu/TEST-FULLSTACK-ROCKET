@@ -12,6 +12,14 @@ const dataInitial = {
   phone: "",
 };
 
+/**
+ * The `useDataSession` function is a custom hook in JavaScript that manages a data session by storing
+ * and retrieving data from local storage.
+ * @param nameItem - The name of the item you want to store in the local storage.
+ * @returns an object with two properties: 
+ * "item" is the data stored in the local storage, 
+ * and "setNewValue" is the function that updates the data stored in the local storage.
+ */
 export default function useDataSession(nameItem) {
   const [item, setItem] = useState(
     JSON.parse(localStorage.getItem(nameItem)) || dataInitial

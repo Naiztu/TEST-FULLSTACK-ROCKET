@@ -1,11 +1,22 @@
 import { useState } from "react";
-import Axios from "axios";
 import Swal from "sweetalert2";
 import useDataSession from "./useDataSession";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER } from "../../services/mutations/UserMutations";
 
+/**
+ * The `useForm` function is a custom hook in JavaScript that handles form data, updates the data
+ * state, and submits the form by send the data to the backend and displaying success or error messages.
+ * @param initialData - The initialData parameter is the initial state of the form data. It is an
+ * object that contains the initial values for the form fields.
+ * @returns The `useForm` function returns an object with three properties: 
+ * `data`: the form data, `handle`: the function that handles the form data, 
+ * and `submit`: the function that submits the form.
+ */
 export const useForm = (initialData) => {
   const [data, setData] = useState(initialData);
-  const {setNewValue} = useDataSession("data");
+  const { setNewValue } = useDataSession("data");
+  const [createUser] = useMutation(CREATE_USER);
 
   const handle = (e) => {
     const newData = { ...data };
@@ -20,20 +31,21 @@ export const useForm = (initialData) => {
 
   async function sendMail() {
     try {
-      const res = await Axios.post(`http://localhost:3000/user`, data);
+      await createUser({
+        variables: {
+          ...data,
+          yearBirth: parseInt(data.yearBirth),
+          monthBirth: parseInt(data.monthBirth),
+          dayBirth: parseInt(data.dayBirth),
+        },
+      });
+
       setNewValue(data);
-      if (res.status === 200)
-        Swal.fire({
-          icon: "success",
-          title: "¡Mensaje enviado!",
-          text: "Gracias por los datos.",
-        });
-      else
-        Swal.fire({
-          icon: "error",
-          title: "¡Error!",
-          text: "No se pudo enviar el mensaje.",
-        });
+      Swal.fire({
+        icon: "success",
+        title: "¡Mensaje enviado!",
+        text: "Gracias por los datos.",
+      });
     } catch (err) {
       console.log(err);
       Swal.fire({

@@ -25,18 +25,11 @@ export const getUsers = async () => {
  */
 export const createUser = async (newUser) => {
   try {
-    const [rows] = await pool.execute(
-      "INSERT INTO users_test_joseangelricomendieta (name, secondName, lastName, secondLastName, dateBirth, email, phone) VALUES (?, ?, ?, ?, ?, ?, ?);",
-      [
-        newUser.name,
-        newUser.secondName,
-        newUser.lastName,
-        newUser.secondLastName,
-        newUser.dateBirth,
-        newUser.email,
-        newUser.phone,
-      ]
+    const [rows] = await pool.query(
+      "INSERT INTO users_test_joseangelricomendieta SET ?;",
+      newUser
     );
+    
     return rows;
   } catch (err) {
     throw { err };

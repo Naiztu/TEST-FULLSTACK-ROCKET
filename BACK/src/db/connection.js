@@ -1,8 +1,6 @@
 import { createPool } from "mysql2/promise";
 import "dotenv/config";
 
-console.log(process.env.MYSQL_PASSWORD);
-
 export const pool = createPool({
   host: process.env.MYSQL_HOST || "",
   user: process.env.MYSQL_USER || "",

@@ -26,7 +26,7 @@ export default function FormDateBirth({ handle, data }) {
             max="12"
             maxLength={2}
             minLength={1}
-            placeholder="Mes"
+            placeholder="Número de Mes"
             id="monthBirth"
             value={monthBirth}
             onChange={handle}
